@@ -252,14 +252,26 @@ def make_aprovação_tabelas_especiais(operações: list, solicitantes: list):
     ).join(
         nf, on = 'chave', how='left'
         ).select([
-            'Aprovar', 'id','data_inclusão', 'chave', 'geo', 'comercial', 'operação', 'cod_pdv', 'nome_fantasia',
-            'ação', 'NGE', 'segmentação_primária', 'volume_tt', 'volume_cerveja', 'volume_nab', 'volume_match', '% Boni', '% Desc', 'print_aprovação'
+            'Aprovar', 'data_inclusão', 'chave', 'geo', 'comercial', 'operação', 'cod_pdv', 'nome_fantasia',
+            'tabela', 'ação', 'NGE', 'segmentação_primária', 'volume_cerveja', 'volume_nab', 'volume_match', '% Boni', '% Desc', 'print_aprovação', 'id'
         ]).with_columns(pl.col(x)*100 for x in ['% Desc', '% Boni'])
 
     st.data_editor(base.collect().to_pandas(), hide_index=True, column_config = {
-        'print_aprovação': st.column_config.ImageColumn('Print do OK'),
-        '% Desc': st.column_config.NumberColumn('% Desconto Total', default='float', format='%.2f %%'),
-        '% Boni': st.column_config.NumberColumn('% Bonificação', default='float', format='%.2f %%')
+        'id': st.column_config.NumberColumn(disabled=True),
+            'Aprovar': st.column_config.CheckboxColumn(),
+            'print_aprovação': st.column_config.ImageColumn('Print do OK'),
+            'segmentação_primária': 'Seg Primária',
+            'data_inclusão': st.column_config.DateColumn('Data', format='DD/MM/YYYY'),
+            'volume_cerveja': st.column_config.NumberColumn('Vol Cerveja', default='float', format='%.2f'),
+            'volume_nab': st.column_config.NumberColumn('Vol NAB', default='float', format='%.2f'),
+            'volume_match': st.column_config.NumberColumn('Vol Match', default='float', format='%.2f'),
+            'cod_pdv': 'PDV',
+            'segmento': 'Seg Solicitado',
+            'nome_fantasia': 'Nome Fantasia',
+            'operação_right': 'Operação',
+            'comercial_right': 'Comercial',
+            '% Desc': st.column_config.NumberColumn('% Desc L3M', default='float', format='%.2f %%'),
+            '% Boni': st.column_config.NumberColumn('% Boni L3M', default='float', format='%.2f %%')
     })
 
 def make_aprovação_segmento(operações: list, solicitantes: list):
