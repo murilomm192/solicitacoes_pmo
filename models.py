@@ -30,7 +30,7 @@ register_adapter(np.ndarray, addapt_numpy_array)
 
 SQLModel.__table_args__ = {'extend_existing': True}
 
-engine = create_engine(st.secrets.connections['supabase'].get('SUPABASE_ANON'), echo=False)
+engine = create_engine(st.secrets['SUPABASE_ANON'], echo=False)
 
 class User(SQLModel, table=True):
     id: int | None = Field(primary_key=True)

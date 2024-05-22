@@ -5,7 +5,7 @@ import polars as pl
 from datetime import datetime
 
 from supabase import create_client, Client
-supabase: Client = create_client(st.secrets.connections['supabase'].get('SUPABASE_URL'), st.secrets.connections['supabase'].get('SUPABASE_KEY'))
+supabase: Client = create_client(st.secrets['SUPABASE_URL'], st.secrets['SUPABASE_KEY'])
 
 from PIL import Image as PILImage
 import io
