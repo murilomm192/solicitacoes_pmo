@@ -40,6 +40,8 @@ def ajuste_image(string: str) -> str:
 tipo_solicitações = [
     'Ajuste de Segmento',
     'Inclusão/Exclusão PDV de Tabela Especial',
+    'Ação de Cobertura',
+    'Bonificação',
     'Inclusão SKU em Ambec',
     'Cadastro TTV de novo SKU'
     ]
